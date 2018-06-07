@@ -171,6 +171,21 @@ else ifeq ($(platform), ctr)
 	PLATFORM_DEFINES += -mword-relocations
 	PLATFORM_DEFINES += -fomit-frame-pointer -fstrict-aliasing -ffast-math
 	STATIC_LINKING = 1
+	
+# Nintendo Switch (libnx)
+else ifeq ($(platform), switch)
+    include $(DEVKITPRO)/libnx/switch_rules
+    EXT=a
+    TARGET := $(TARGET_NAME)_libretro_$(platform).$(EXT)
+    DEFINES := -DSWITCH=1 -U__linux__ -U__linux -DRARCH_INTERNAL
+    CFLAGS    :=     $(DEFINES) -g \
+                -O2 \
+                -fPIE -I$(LIBNX)/include/ -ffunction-sections -fdata-sections -ftls-model=local-exec -Wl,--allow-multiple-definition -specs=$(LIBNX)/switch.specs
+    CFLAGS += $(INCDIRS)
+    CFLAGS    +=    $(INCLUDE)  -D__SWITCH__
+    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fno-rtti -fexceptions -std=gnu++11
+    CFLAGS += -std=gnu11
+    STATIC_LINKING = 1
 
 # Raspberry Pi 2 (Raspbian)
 else ifeq ($(platform), rpi2)
