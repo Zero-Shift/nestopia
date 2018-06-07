@@ -576,7 +576,7 @@ namespace Nes
 					filter = NULL;
 				}
 
-				try
+				//try
 				{
 					switch (renderState.filter)
 					{
@@ -651,13 +651,13 @@ namespace Nes
 					#endif
 					}
 				}
-				catch (const std::bad_alloc&)
+				/*catch (const std::bad_alloc&)
 				{
 					delete filter;
 					filter = NULL;
 
 					return RESULT_ERR_OUT_OF_MEMORY;
-				}
+				}*/
 
 				if (filter)
 				{

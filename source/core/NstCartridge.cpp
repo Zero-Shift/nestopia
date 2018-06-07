@@ -49,7 +49,7 @@ namespace Nes
 		Cartridge::Cartridge(Context& context)
 		: Image(CARTRIDGE), board(NULL), vs(NULL), favoredSystem(context.favoredSystem)
 		{
-			try
+			//try
 			{
 				ProfileEx profileEx;
 
@@ -114,7 +114,7 @@ namespace Nes
 				const Result result = SetupBoard( prg, chr, &board, &context, profile, profileEx, &prgCrc );
 
 				if (NES_FAILED(result))
-					throw result;
+				//	throw result;
 
 				board->Load( savefile );
 
@@ -132,16 +132,16 @@ namespace Nes
 				}
 				else if ((profile.system.type) == Profile::System::VS_DUALSYSTEM)
 				{
-					throw RESULT_ERR_UNSUPPORTED_VSSYSTEM;
+					//throw RESULT_ERR_UNSUPPORTED_VSSYSTEM;
 				}
 
 				if (Cartridge::QueryExternalDevice( EXT_DIP_SWITCHES ))
 					Log::Flush( "Cartridge: DIP Switches present" NST_LINEBREAK );
 			}
-			catch (...)
+			//catch (...)
 			{
 				Destroy();
-				throw;
+				//throw;
 			}
 		}
 
@@ -360,7 +360,7 @@ namespace Nes
 
 		bool Cartridge::PowerOff()
 		{
-			try
+			//try
 			{
 				if (board)
 				{
@@ -370,7 +370,7 @@ namespace Nes
 
 				return true;
 			}
-			catch (...)
+			//catch (...)
 			{
 				return false;
 			}

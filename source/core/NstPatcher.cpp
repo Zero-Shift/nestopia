@@ -122,7 +122,7 @@ namespace Nes
 			{
 				Vector<byte> buffer;
 
-				try
+				//try
 				{
 					dword size = 0;
 
@@ -131,7 +131,7 @@ namespace Nes
 
 					buffer.Reserve( size );
 				}
-				catch (...)
+				//catch (...)
 				{
 					return RESULT_ERR_OUT_OF_MEMORY;
 				}

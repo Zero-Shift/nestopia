@@ -179,8 +179,8 @@ namespace Nes
 				{
 					if (chunks.Back() >= 4+4+length)
 						chunks.Back() -= 4+4+length;
-					else
-						throw RESULT_ERR_CORRUPT_FILE;
+					//else
+					//	throw RESULT_ERR_CORRUPT_FILE;
 				}
 
 				chunks.Append( length );
@@ -217,8 +217,8 @@ namespace Nes
 			{
 				if (chunks.Back() >= length)
 					chunks.Back() -= length;
-				else
-					throw RESULT_ERR_CORRUPT_FILE;
+				//else
+				//	throw RESULT_ERR_CORRUPT_FILE;
 			}
 
 			uint Loader::Read8()
@@ -266,7 +266,7 @@ namespace Nes
 
 						if (!Zlib::AVAILABLE)
 						{
-							throw RESULT_ERR_UNSUPPORTED;
+						//	throw RESULT_ERR_UNSUPPORTED;
 						}
 						else if (chunks.Back())
 						{
@@ -277,9 +277,9 @@ namespace Nes
 								break;
 						}
 
-					default:
+					//default:
 
-						throw RESULT_ERR_CORRUPT_FILE;
+					//	return RESULT_ERR_CORRUPT_FILE;
 				}
 			}
 		}

@@ -260,7 +260,7 @@ namespace Nes
 			if (emulator.tracker.IsLocked( true ))
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				if (emulator.cheats == NULL)
 					emulator.cheats = new Core::Cheats( emulator.cpu );
@@ -278,14 +278,14 @@ namespace Nes
 					true
 				);
 			}
-			catch (const std::bad_alloc&)
+			/*catch (const std::bad_alloc&)
 			{
 				return RESULT_ERR_OUT_OF_MEMORY;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 		}
 
 		Result Cheats::DeleteCode(const ulong index) throw()

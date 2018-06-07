@@ -148,7 +148,7 @@ namespace Nes
 					if (altered)
 						*altered = true;
 
-					try
+					//try
 					{
                   Nes::Core::Stream::In stream( &stdStream );
 
@@ -168,7 +168,7 @@ namespace Nes
 							return RESULT_ERR_INVALID_PARAM;
 						}
 					}
-					catch (Result result)
+					/*catch (Result result)
 					{
 						return result;
 					}
@@ -179,7 +179,7 @@ namespace Nes
 					catch (...)
 					{
 						return RESULT_ERR_GENERIC;
-					}
+					}*/
 
 					return RESULT_OK;
 				}
@@ -284,7 +284,7 @@ namespace Nes
 					if (!filedata || !filesize)
 						return RESULT_ERR_INVALID_PARAM;
 
-					try
+					/*try
 					{
 						buffer.Assign( static_cast<const byte*>(filedata), NST_MIN(filesize,maxsize) );
 					}
@@ -295,14 +295,14 @@ namespace Nes
 					catch (...)
 					{
 						return RESULT_ERR_GENERIC;
-					}
+					}*/
 
 					return RESULT_OK;
 				}
 
 				Result SetContent(std::istream& stdStream) throw()
 				{
-					try
+					//try
 					{
                   Nes::Core::Stream::In stream( &stdStream );
 
@@ -310,7 +310,7 @@ namespace Nes
 						{
 							buffer.Resize( NST_MIN(length,maxsize) );
 
-							try
+							/*try
 							{
 								stream.Read( buffer.Begin(), buffer.Size() );
 							}
@@ -318,14 +318,14 @@ namespace Nes
 							{
 								buffer.Destroy();
 								throw;
-							}
+							}*/
 						}
 						else
 						{
 							return RESULT_ERR_INVALID_PARAM;
 						}
 					}
-					catch (Result result)
+					/*catch (Result result)
 					{
 						return result;
 					}
@@ -336,7 +336,7 @@ namespace Nes
 					catch (...)
 					{
 						return RESULT_ERR_GENERIC;
-					}
+					}*/
 
 					return RESULT_OK;
 				}
@@ -418,11 +418,11 @@ namespace Nes
 						{
 							if (!buffer.Size())
 							{
-								try
+								/*try
 								{
 									buffer.Resize( Saver::GetMaxSize() );
 								}
-								catch (...)
+								catch (...)*/
 								{
 									filedata = NULL;
 									filesize = 0;
@@ -447,7 +447,7 @@ namespace Nes
 
 					Result GetContent(std::ostream& stdStream) const throw()
 					{
-						try
+						//try
 						{
                      Nes::Core::Stream::Out stream( &stdStream );
 
@@ -457,7 +457,7 @@ namespace Nes
 									stream.Write( it->data, it->size );
 							}
 						}
-						catch (Result result)
+						/*catch (Result result)
 						{
 							return result;
 						}
@@ -468,7 +468,7 @@ namespace Nes
 						catch (...)
 						{
 							return RESULT_ERR_GENERIC;
-						}
+						}*/
 
 						return RESULT_OK;
 					}

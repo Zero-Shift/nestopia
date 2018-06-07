@@ -251,10 +251,10 @@ namespace Nes
 					data[3] != Ascii<'M'>::V ||
 					data[4] != 0x1A
 				)
-					throw RESULT_ERR_INVALID_FILE;
+					//throw RESULT_ERR_INVALID_FILE;
 
 				if (!data[6] || data[9] < 0x60 || data[11] < 0x60 || data[13] < 0x60)
-					throw RESULT_ERR_CORRUPT_FILE;
+					//throw RESULT_ERR_CORRUPT_FILE;
 
 				songs.count = data[6];
 				songs.start = data[7] >= 1 && data[7] <= data[6] ? data[7] - 1 : 0;
@@ -301,16 +301,16 @@ namespace Nes
 
 			uint types = stream.Read8();
 
-			if (!(types & Api::Nsf::CHIP_FDS) && addressing.load < 0x8000)
-				throw RESULT_ERR_CORRUPT_FILE;
+			//if (!(types & Api::Nsf::CHIP_FDS) && addressing.load < 0x8000)
+				//throw RESULT_ERR_CORRUPT_FILE;
 
 			dword length = 0;
 
 			while (length < SIZE_4096K && stream.SafeRead8() <= 0xFF)
 				++length;
 
-			if (length <= HEADER_RESERVED_LENGTH)
-				throw RESULT_ERR_CORRUPT_FILE;
+			//if (length <= HEADER_RESERVED_LENGTH)
+				//throw RESULT_ERR_CORRUPT_FILE;
 
 			length -= HEADER_RESERVED_LENGTH;
 			stream.Seek( -idword(length) );

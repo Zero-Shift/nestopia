@@ -170,8 +170,8 @@ namespace Nes
 		sound         (context.apu),
 		favoredSystem (context.favoredSystem)
 		{
-			if (!bios.Available())
-				throw RESULT_ERR_MISSING_BIOS;
+			//if (!bios.Available())
+			//	throw RESULT_ERR_MISSING_BIOS;
 
 			if (context.patch && context.patchResult)
 				*context.patchResult = RESULT_ERR_UNSUPPORTED;
@@ -398,8 +398,8 @@ namespace Nes
 					{
 						State::Loader::Data<4> data( state );
 
-						if (data[0] != disks.sides.count)
-							throw RESULT_ERR_INVALID_FILE;
+						//if (data[0] != disks.sides.count)
+						//	throw RESULT_ERR_INVALID_FILE;
 
 						saveDisks[0] = data[1];
 						saveDisks[1] = data[2];
@@ -441,8 +441,8 @@ namespace Nes
 
 				if (saveDisks[0] & 0x1U)
 				{
-					if (NES_FAILED(InsertDisk( saveDisks[1] / 2, saveDisks[1] % 2 )))
-						throw RESULT_ERR_CORRUPT_FILE;
+					//if (NES_FAILED(InsertDisk( saveDisks[1] / 2, saveDisks[1] % 2 )))
+					//	throw RESULT_ERR_CORRUPT_FILE;
 
 					disks.mounting = saveDisks[2];
 				}
@@ -667,11 +667,11 @@ namespace Nes
 					break;
 				}
 
-				default: throw RESULT_ERR_INVALID_FILE;
+				//default: throw RESULT_ERR_INVALID_FILE;
 			}
 
-			if (!size)
-				throw RESULT_ERR_CORRUPT_FILE;
+			//if (!size)
+			//	throw RESULT_ERR_CORRUPT_FILE;
 
 			count = size;
 			size *= SIDE_SIZE;
@@ -679,7 +679,7 @@ namespace Nes
 			std::memset( data, 0, HEADER_SIZE );
 			data += HEADER_SIZE;
 
-			try
+			/*try
 			{
 				stream.Read( data - header, header + size );
 				file.Load( data - header, header + size, File::DISK );
@@ -688,7 +688,7 @@ namespace Nes
 			{
 				delete [] (data - HEADER_SIZE);
 				throw;
-			}
+			}*/
 		}
 
 		Fds::Disks::Sides::~Sides()
@@ -698,12 +698,12 @@ namespace Nes
 
 		void Fds::Disks::Sides::Save() const
 		{
-			try
+			/*try
 			{
 				const uint header = HasHeader() ? HEADER_SIZE : 0;
 				file.Save( File::DISK, data - header, header + count * dword(SIDE_SIZE) );
 			}
-			catch (...)
+			catch (...)*/
 			{
 				NST_DEBUG_MSG("fds save failure!");
 			}
@@ -844,7 +844,7 @@ namespace Nes
 
 		Result Fds::Unit::Drive::Analyze(const byte* NST_RESTRICT src,Api::Fds::DiskData& dst)
 		{
-			try
+			//try
 			{
 				idword i = SIDE_SIZE;
 
@@ -950,14 +950,14 @@ namespace Nes
 
 				return i >= 0 ? RESULT_OK : RESULT_WARN_BAD_DUMP;
 			}
-			catch (const std::bad_alloc&)
+/*			catch (const std::bad_alloc&)
 			{
 				return RESULT_ERR_OUT_OF_MEMORY;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 		}
 
 		#ifdef NST_MSVC_OPTIMIZE

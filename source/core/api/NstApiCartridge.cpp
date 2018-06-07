@@ -411,54 +411,54 @@ namespace Nes
 
 		Result Cartridge::ReadRomset(std::istream& stream,Machine::FavoredSystem system,bool askProfile,Profile& profile) throw()
 		{
-			try
+			//try
 			{
 				Core::Cartridge::ReadRomset( stream, static_cast<Core::FavoredSystem>(system), askProfile, profile );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
 
 		Result Cartridge::ReadInes(std::istream& stream,Machine::FavoredSystem system,Profile& profile) throw()
 		{
-			try
+			//try
 			{
 				Core::Cartridge::ReadInes( stream, static_cast<Core::FavoredSystem>(system), profile );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
 
 		Result Cartridge::ReadUnif(std::istream& stream,Machine::FavoredSystem system,Profile& profile) throw()
 		{
-			try
+			//try
 			{
 				Core::Cartridge::ReadUnif( stream, static_cast<Core::FavoredSystem>(system), profile );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
@@ -497,18 +497,18 @@ namespace Nes
 			if (!entry)
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				entry.Fill(profile);
 			}
-			catch (const std::bad_alloc&)
+			/*catch (const std::bad_alloc&)
 			{
 				return RESULT_ERR_OUT_OF_MEMORY;
 			}
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}

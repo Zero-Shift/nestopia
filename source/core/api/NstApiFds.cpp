@@ -107,7 +107,7 @@ namespace Nes
 			if (emulator.Is(Machine::GAME,Machine::ON))
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				if (stdStream)
 				{
@@ -138,7 +138,7 @@ namespace Nes
 
 				Core::Fds::SetBios( stdStream );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -149,18 +149,18 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
 
 		Result Fds::GetBIOS(std::ostream& stream) const throw()
 		{
-			try
+			//try
 			{
 				return Core::Fds::GetBios( stream );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -171,7 +171,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 		}
 
 		bool Fds::HasBIOS() const throw()

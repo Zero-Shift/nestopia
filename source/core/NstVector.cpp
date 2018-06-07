@@ -37,8 +37,8 @@ namespace Nes
 
 			if (void* mem = std::malloc( size ))
 				return mem;
-			else
-				throw std::bad_alloc();
+			//else
+			//	throw std::bad_alloc();
 		}
 
 		void* Vector<void>::Realloc(void* mem,dword size)
@@ -47,8 +47,8 @@ namespace Nes
 
 			if (NULL != (mem = std::realloc( mem, size )))
 				return mem;
-			else
-				throw std::bad_alloc();
+			//else
+			//	throw std::bad_alloc();
 		}
 
 		void Vector<void>::Free(void* mem)

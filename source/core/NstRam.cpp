@@ -158,7 +158,7 @@ namespace Nes
 					else
 					{
 						Destroy();
-						throw RESULT_ERR_OUT_OF_MEMORY;
+						//throw RESULT_ERR_OUT_OF_MEMORY;
 					}
 				}
 

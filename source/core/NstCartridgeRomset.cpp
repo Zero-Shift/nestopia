@@ -115,16 +115,18 @@ namespace Nes
 			void Collect()
 			{
 				Xml xml;
+				
+				const Xml::Node romset( xml.GetRoot() );
+				uint version = DEFAULT_VERSION;
 
 				if (!xml.Read( imageStream ))
-					throw RESULT_ERR_INVALID_FILE;
+					//throw RESULT_ERR_INVALID_FILE;
 
-				const Xml::Node romset( xml.GetRoot() );
 
 				if (!romset.IsType( L"romset" ))
-					throw RESULT_ERR_INVALID_FILE;
+					//throw RESULT_ERR_INVALID_FILE;
 
-				uint version = DEFAULT_VERSION;
+				
 
 				if (const Xml::Attribute attribute=romset.GetAttribute( L"version" ))
 				{
@@ -142,7 +144,7 @@ namespace Nes
 					}
 					else
 					{
-						throw RESULT_ERR_INVALID_FILE;
+						//throw RESULT_ERR_INVALID_FILE;
 					}
 				}
 
@@ -156,7 +158,7 @@ namespace Nes
 					}
 					else if (version != DEFAULT_VERSION && !attribute.IsValue( L"strict" ))
 					{
-						throw RESULT_ERR_INVALID_FILE;
+						//throw RESULT_ERR_INVALID_FILE;
 					}
 				}
 
@@ -188,7 +190,7 @@ namespace Nes
 							}
 							else if (strict)
 							{
-								throw RESULT_ERR_INVALID_FILE;
+								//throw RESULT_ERR_INVALID_FILE;
 							}
 						}
 
@@ -253,12 +255,12 @@ namespace Nes
 								}
 								else
 								{
-									throw RESULT_ERR_INVALID_FILE;
+									//throw RESULT_ERR_INVALID_FILE;
 								}
 							}
 							else if (strict)
 							{
-								throw RESULT_ERR_INVALID_FILE;
+								//throw RESULT_ERR_INVALID_FILE;
 							}
 						}
 						else if (image.IsType( L"arcade" ))
@@ -281,17 +283,17 @@ namespace Nes
 								}
 								else
 								{
-									throw RESULT_ERR_INVALID_FILE;
+									//throw RESULT_ERR_INVALID_FILE;
 								}
 							}
 							else
 							{
-								throw RESULT_ERR_INVALID_FILE;
+								//throw RESULT_ERR_INVALID_FILE;
 							}
 						}
 						else
 						{
-							throw RESULT_ERR_INVALID_FILE;
+							//throw RESULT_ERR_INVALID_FILE;
 						}
 
 						p.dump.by = image.GetAttribute( L"dumper" ).GetValue();
@@ -310,7 +312,7 @@ namespace Nes
 							}
 							else if (strict && !attribute.IsValue( L"ok" ))
 							{
-								throw RESULT_ERR_INVALID_FILE;
+								//throw RESULT_ERR_INVALID_FILE;
 							}
 						}
 
@@ -371,7 +373,7 @@ namespace Nes
 								}
 								else if (strict)
 								{
-									throw RESULT_ERR_INVALID_FILE;
+									//throw RESULT_ERR_INVALID_FILE;
 								}
 							}
 
@@ -444,8 +446,8 @@ namespace Nes
 
 								if (true == (first=node.IsType( L"prg" )) || node.IsType( L"chr" ))
 								{
-									if (size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
-										throw RESULT_ERR_INVALID_FILE;
+									//if (size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
+									//	throw RESULT_ERR_INVALID_FILE;
 
 									Profile::Board::Roms& roms = (first ? p.board.prg : p.board.chr);
 
@@ -470,8 +472,8 @@ namespace Nes
 								}
 								else if (true == (first=node.IsType( L"wram" )) || node.IsType( L"vram" ))
 								{
-									if (size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
-										throw RESULT_ERR_INVALID_FILE;
+									//if (size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
+									//	throw RESULT_ERR_INVALID_FILE;
 
 									Profile::Board::Rams& rams = (first ? p.board.wram : p.board.vram);
 
@@ -663,8 +665,8 @@ namespace Nes
 
 			void ChooseProfile()
 			{
-				if (profiles.empty())
-					throw RESULT_ERR_INVALID_FILE;
+				//if (profiles.empty())
+				//	throw RESULT_ERR_INVALID_FILE;
 
 				Profiles::const_iterator bestMatch( profiles.begin() );
 
@@ -837,7 +839,7 @@ namespace Nes
 
 							Result SetContent(std::istream& stdStream) throw()
 							{
-								try
+								//try
 								{
                            Nes::Core::Stream::In stream( &stdStream );
 
@@ -847,20 +849,20 @@ namespace Nes
 										loaded = true;
 									}
 								}
-								catch (Result result)
+								//catch (Result result)
 								{
-									return result;
+									//return result;
 								}
-								catch (const std::bad_alloc&)
+								//catch (const std::bad_alloc&)
 								{
-									return RESULT_ERR_OUT_OF_MEMORY;
+									//return RESULT_ERR_OUT_OF_MEMORY;
 								}
-								catch (...)
+								//catch (...)
 								{
-									return RESULT_ERR_GENERIC;
+									//return RESULT_ERR_GENERIC;
 								}
 
-								return RESULT_OK;
+								//return RESULT_OK;
 							}
 
 						public:
@@ -888,8 +890,8 @@ namespace Nes
 					{
 						size += it->size;
 
-						if (it->size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
-							throw RESULT_ERR_INVALID_FILE;
+						//if (it->size < MIN_CHIP_SIZE || size > MAX_CHIP_SIZE)
+						//	throw RESULT_ERR_INVALID_FILE;
 					}
 
 					rom.Set( size );
@@ -900,8 +902,8 @@ namespace Nes
 					if (readOnly)
 						continue;
 
-					if (!Api::User::fileIoCallback)
-						throw RESULT_ERR_NOT_READY;
+					//if (!Api::User::fileIoCallback)
+					//	throw RESULT_ERR_NOT_READY;
 
 					size = 0;
 
@@ -910,14 +912,14 @@ namespace Nes
 
 					for (Profile::Board::Roms::iterator it(roms.begin()), end(roms.end()); it != end; ++it)
 					{
-						if (it->file.empty())
-							throw RESULT_ERR_INVALID_FILE;
+						//if (it->file.empty())
+						//	throw RESULT_ERR_INVALID_FILE;
 
 						Loader loader( it->file.c_str(), rom.Mem(size), it->size );
 						Api::User::fileIoCallback( loader );
 
-						if (!loader.Loaded())
-							throw RESULT_ERR_INVALID_FILE;
+						//if (!loader.Loaded())
+						//	throw RESULT_ERR_INVALID_FILE;
 
 						size += it->size;
 					}

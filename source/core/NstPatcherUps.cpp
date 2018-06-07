@@ -59,14 +59,14 @@ namespace Nes
 
 			void ReadSignature()
 			{
-				if
-				(
+				//if
+				
 					Read() != Ascii<'U'>::V ||
 					Read() != Ascii<'P'>::V ||
 					Read() != Ascii<'S'>::V ||
-					Read() != Ascii<'1'>::V
-				)
-					throw RESULT_ERR_INVALID_FILE;
+					Read() != Ascii<'1'>::V;
+				
+					//throw RESULT_ERR_INVALID_FILE;
 			}
 
 			dword Remaining() const
@@ -157,11 +157,11 @@ namespace Nes
 
 		bool Ups::IsUps(std::istream& stream)
 		{
-			try
+			//try
 			{
 				return Stream::In(&stream).Peek32() == AsciiId<'U','P','S','1'>::V;
 			}
-			catch (...)
+			//catch (...)
 			{
 				return false;
 			}
@@ -171,7 +171,7 @@ namespace Nes
 		{
 			Destroy();
 
-			try
+			//try
 			{
 				Reader reader( stdStream );
 
@@ -190,14 +190,14 @@ namespace Nes
 					i += reader.ReadInt();
 
 					if (i > MAX_OFFSET)
-						throw RESULT_ERR_OUT_OF_MEMORY;
+						//throw RESULT_ERR_OUT_OF_MEMORY;
 
 					while (const uint data = reader.Read())
 					{
 						if (i < dstSize)
 							patch[i++] = data;
-						else
-							throw RESULT_ERR_CORRUPT_FILE;
+						//else
+							//throw RESULT_ERR_CORRUPT_FILE;
 					}
 				}
 
@@ -208,9 +208,9 @@ namespace Nes
 				const dword fileCrc = reader.ReadCrc();
 
 				if (!bypassChecksum && crc != fileCrc)
-					throw RESULT_ERR_INVALID_CRC;
+					return RESULT_ERR_INVALID_CRC;
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				Destroy();
 				return result;
@@ -224,14 +224,14 @@ namespace Nes
 			{
 				Destroy();
 				return RESULT_ERR_CORRUPT_FILE;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
 
 		Result Ups::Save(std::ostream& stdStream) const
 		{
-			try
+			//try
 			{
 				Writer writer( stdStream );
 
@@ -262,7 +262,7 @@ namespace Nes
 				writer.WriteCrc( dstCrc );
 				writer.WriteCrc( writer.Crc() );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -273,7 +273,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
@@ -282,7 +282,7 @@ namespace Nes
 		{
 			Vector<byte> buffer( srcSize );
 
-			try
+			//try
 			{
 				Stream::In stream( &stdStream );
 
@@ -292,7 +292,7 @@ namespace Nes
 				if (buffer.Size())
 					stream.Peek( buffer.Begin(), buffer.Size() );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -303,7 +303,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_CORRUPT_FILE;
-			}
+			}*/
 
 			return Test( buffer.Begin(), buffer.Size(), bypassChecksum );
 		}
@@ -377,8 +377,8 @@ namespace Nes
 		{
 			if (remaining)
 				remaining--;
-			else
-				throw 1;
+			//else
+			//	throw 1;
 
 			const uint data = stream.Read8();
 			crc = Crc32::Compute( data, crc );
@@ -396,7 +396,7 @@ namespace Nes
 				v += (b & 0x7F) << s;
 
 				if (v > MAX_SIZE)
-					throw 1;
+					//throw 1;
 
 				if (b & 0x80)
 					break;

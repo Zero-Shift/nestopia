@@ -184,8 +184,8 @@ namespace Nes
 
 			void ReadHeader()
 			{
-				if (stream.Read32() != AsciiId<'U','N','I','F'>::V)
-					throw RESULT_ERR_INVALID_FILE;
+				//if (stream.Read32() != AsciiId<'U','N','I','F'>::V)
+				//	throw RESULT_ERR_INVALID_FILE;
 
 				dword version = stream.Read32();
 
@@ -288,10 +288,10 @@ namespace Nes
 						if (id)
 							stream.Seek( id );
 					}
-					else if (id > length)
+					/*else if (id > length)
 					{
 						throw RESULT_ERR_CORRUPT_FILE;
-					}
+					}*/
 				}
 
 				for (uint i=0; i < 2; ++i)

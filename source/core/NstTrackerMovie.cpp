@@ -114,8 +114,8 @@ namespace Nes
 			{
 				NST_ASSERT( loadState );
 
-				if (buffers[0].pos > buffers[0].Size() || buffers[1].pos > buffers[1].Size())
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (buffers[0].pos > buffers[0].Size() || buffers[1].pos > buffers[1].Size())
+				//	throw RESULT_ERR_CORRUPT_FILE;
 
 				if (frame)
 				{
@@ -189,8 +189,8 @@ namespace Nes
 
 		dword Tracker::Movie::Player::Validate(State::Loader& state,const Cpu& cpu,const dword prgCrc,const bool end)
 		{
-			if (state.Begin() != (AsciiId<'N','S','V'>::V | 0x1AUL << 24))
-				throw RESULT_ERR_INVALID_FILE;
+			//if (state.Begin() != (AsciiId<'N','S','V'>::V | 0x1AUL << 24))
+			//	throw RESULT_ERR_INVALID_FILE;
 
 			const dword length = state.Length();
 
@@ -217,7 +217,7 @@ namespace Nes
 				}
 				else
 				{
-					throw RESULT_ERR_UNSUPPORTED_FILE_VERSION;
+					return RESULT_ERR_UNSUPPORTED_FILE_VERSION;
 				}
 			}
 
@@ -225,10 +225,10 @@ namespace Nes
 				state.End( length );
 
 			if (region != cpu.GetRegion())
-				throw RESULT_ERR_WRONG_MODE;
+				return RESULT_ERR_WRONG_MODE;
 
 			if (crc && prgCrc && crc != prgCrc && Api::User::questionCallback( Api::User::QUESTION_NSV_PRG_CRC_FAIL_CONTINUE ) == Api::User::ANSWER_NO)
-				throw RESULT_ERR_INVALID_CRC;
+				return RESULT_ERR_INVALID_CRC;
 
 			return length;
 		}
@@ -350,8 +350,8 @@ namespace Nes
 			{
 				NST_ASSERT( saveState );
 
-				if (frame == BAD_FRAME)
-					throw RESULT_ERR_OUT_OF_MEMORY;
+				//if (frame == BAD_FRAME)
+				//	throw RESULT_ERR_OUT_OF_MEMORY;
 
 				if (resync || buffers[0].Size() >= MAX_BUFFER_BLOCK || buffers[1].Size() >= MAX_BUFFER_BLOCK)
 				{
@@ -391,8 +391,8 @@ namespace Nes
 
 		void Tracker::Movie::Recorder::EndKey()
 		{
-			if (frame == BAD_FRAME)
-				throw RESULT_ERR_OUT_OF_MEMORY;
+			//if (frame == BAD_FRAME)
+			//	throw RESULT_ERR_OUT_OF_MEMORY;
 
 			if (frame)
 			{
@@ -422,14 +422,14 @@ namespace Nes
 
 			if (frame != BAD_FRAME)
 			{
-				try
+				//try
 				{
 					buffers[address & 0x1].Append( data );
 				}
-				catch (...)
-				{
-					frame = BAD_FRAME;
-				}
+				//catch (...)
+				//{
+				//	frame = BAD_FRAME;
+				//}
 			}
 
 			return data;
@@ -463,11 +463,11 @@ namespace Nes
 
 		bool Tracker::Movie::Record(std::iostream& stream,const bool append)
 		{
-			if (!Zlib::AVAILABLE)
-				throw RESULT_ERR_UNSUPPORTED;
+			//if (!Zlib::AVAILABLE)
+			//	throw RESULT_ERR_UNSUPPORTED;
 
-			if (player)
-				throw RESULT_ERR_NOT_READY;
+			//if (player)
+			//	throw RESULT_ERR_NOT_READY;
 
 			if (recorder && *recorder == stream)
 				return false;
@@ -483,11 +483,11 @@ namespace Nes
 
 		bool Tracker::Movie::Play(std::istream& stream)
 		{
-			if (!Zlib::AVAILABLE)
-				throw RESULT_ERR_UNSUPPORTED;
+			//if (!Zlib::AVAILABLE)
+			//	throw RESULT_ERR_UNSUPPORTED;
 
-			if (recorder)
-				throw RESULT_ERR_NOT_READY;
+			//if (recorder)
+			//	throw RESULT_ERR_NOT_READY;
 
 			if (player && *player == stream)
 				return false;
@@ -512,14 +512,14 @@ namespace Nes
 			{
 				if (NES_SUCCEEDED(result))
 				{
-					try
+					//try
 					{
 						if (recorder)
 							recorder->Stop();
 						else
 							player->Stop();
 					}
-					catch (Result r)
+					/*catch (Result r)
 					{
 						result = r;
 					}
@@ -530,7 +530,7 @@ namespace Nes
 					catch (...)
 					{
 						result = RESULT_ERR_GENERIC;
-					}
+					}*/
 				}
 
 				if (recorder)
@@ -583,7 +583,7 @@ namespace Nes
 		{
 			Result result = RESULT_OK;
 
-			try
+			//try
 			{
 				if (recorder)
 				{
@@ -595,7 +595,7 @@ namespace Nes
 					return true;
 				}
 			}
-			catch (Result r)
+			/*catch (Result r)
 			{
 				result = r;
 			}
@@ -606,10 +606,10 @@ namespace Nes
 			catch (...)
 			{
 				result = RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			if (!Stop( result ))
-				throw result;
+				return result;
 
 			return false;
 		}

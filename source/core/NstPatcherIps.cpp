@@ -39,7 +39,7 @@ namespace Nes
 
 		bool Ips::IsIps(std::istream& stream)
 		{
-			try
+			//try
 			{
 				byte data[5];
 				Stream::In(&stream).Peek( data, 5 );
@@ -53,7 +53,7 @@ namespace Nes
 					data[4] == Ascii<'H'>::V
 				);
 			}
-			catch (...)
+			//catch (...)
 			{
 				return false;
 			}
@@ -66,7 +66,7 @@ namespace Nes
 			if (!IsIps(stdStream))
 				return RESULT_ERR_INVALID_FILE;
 
-			try
+			//try
 			{
 				Stream::In stream( &stdStream );
 
@@ -107,12 +107,12 @@ namespace Nes
 
 						if (block.length)
 							block.fill = stream.Read8();
-						else
-							throw RESULT_ERR_CORRUPT_FILE;
+						//else
+							//throw RESULT_ERR_CORRUPT_FILE;
 					}
 				}
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				Destroy();
 				return result;
@@ -126,14 +126,14 @@ namespace Nes
 			{
 				Destroy();
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
 
 		Result Ips::Save(std::ostream& stdStream) const
 		{
-			try
+			//try
 			{
 				Stream::Out stream( &stdStream );
 
@@ -180,7 +180,7 @@ namespace Nes
 
 				stream.Write( data, 3 );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -191,7 +191,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
@@ -248,7 +248,7 @@ namespace Nes
 
 			Destroy();
 
-			try
+			//try
 			{
 				for (dword i=0; i < length; )
 				{
@@ -334,7 +334,7 @@ namespace Nes
 					while (j != i);
 				}
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				Destroy();
 				return result;
@@ -348,7 +348,7 @@ namespace Nes
 			{
 				Destroy();
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}

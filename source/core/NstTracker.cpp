@@ -163,7 +163,7 @@ namespace Nes
 
 			Result result;
 
-			try
+			//try
 			{
 				if (movie == NULL)
 				{
@@ -189,7 +189,7 @@ namespace Nes
 					return RESULT_NOP;
 				}
 			}
-			catch (Result r)
+			/*catch (Result r)
 			{
 				result = r;
 			}
@@ -200,7 +200,7 @@ namespace Nes
 			catch (...)
 			{
 				result = RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			StopMovie();
 
@@ -216,7 +216,7 @@ namespace Nes
 
 			Result result;
 
-			try
+			//try
 			{
 				if (movie == NULL)
 				{
@@ -232,7 +232,7 @@ namespace Nes
 
 				return movie->Record( stream, append ) ? RESULT_OK : RESULT_NOP;
 			}
-			catch (Result r)
+			/*catch (Result r)
 			{
 				result = r;
 			}
@@ -243,7 +243,7 @@ namespace Nes
 			catch (...)
 			{
 				result = RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			StopMovie();
 
@@ -309,7 +309,7 @@ namespace Nes
 			{
 				++frame;
 
-				try
+				//try
 				{
 					if (machine.Is(Api::Machine::GAME))
 					{
@@ -334,7 +334,7 @@ namespace Nes
 					machine.Execute( video, sound, input );
 					return RESULT_OK;
 				}
-				catch (Result result)
+				/*catch (Result result)
 				{
 					return machine.PowerOff( result );
 				}
@@ -345,7 +345,7 @@ namespace Nes
 				catch (...)
 				{
 					return machine.PowerOff( RESULT_ERR_GENERIC );
-				}
+				}*/
 			}
 			else
 			{

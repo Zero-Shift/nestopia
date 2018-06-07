@@ -59,7 +59,7 @@ namespace Nes
 
 			const bool on = Is(ON);
 
-			try
+			//try
 			{
 				result = emulator.Load
 				(
@@ -72,7 +72,7 @@ namespace Nes
 					type
 				);
 			}
-			catch (Result r)
+			/*catch (Result r)
 			{
 				return r;
 			}
@@ -83,7 +83,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			if (on)
 				Power( true );
@@ -136,11 +136,11 @@ namespace Nes
 
 			if (on)
 			{
-				try
+				//try
 				{
 					emulator.Reset( true );
 				}
-				catch (Result result)
+				/*catch (Result result)
 				{
 					return result;
 				}
@@ -151,7 +151,7 @@ namespace Nes
 				catch (...)
 				{
 					return RESULT_ERR_GENERIC;
-				}
+				}*/
 
 				return RESULT_OK;
 			}
@@ -166,11 +166,11 @@ namespace Nes
 			if (!Is(ON) || IsLocked())
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				emulator.Reset( hard );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -181,7 +181,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}
@@ -225,7 +225,7 @@ namespace Nes
 			if (!Is(GAME,ON) || IsLocked())
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				emulator.tracker.Resync();
 				Core::State::Loader loader( &stream, true );
@@ -235,7 +235,7 @@ namespace Nes
 				else
 					return RESULT_ERR_INVALID_CRC;
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -246,7 +246,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 		}
 
 		Result Machine::SaveState(std::ostream& stream,Compression compression) const throw()
@@ -254,12 +254,12 @@ namespace Nes
 			if (!Is(GAME,ON))
 				return RESULT_ERR_NOT_READY;
 
-			try
+			//try
 			{
 				Core::State::Saver saver( &stream, compression != NO_COMPRESSION, false );
 				emulator.SaveState( saver );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -270,7 +270,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			return RESULT_OK;
 		}

@@ -51,8 +51,8 @@ namespace Nes
 
 				SafeRead( data, size );
 
-				if (!*static_cast<std::istream*>(stream))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!*static_cast<std::istream*>(stream))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 			}
 
 			uint In::Read8()
@@ -103,8 +103,8 @@ namespace Nes
 			{
 				Clear();
 
-				if (!static_cast<std::istream*>(stream)->seekg( distance, std::ios::cur ))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!static_cast<std::istream*>(stream)->seekg( distance, std::ios::cur ))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 			}
 
 			ulong In::Length()
@@ -115,15 +115,15 @@ namespace Nes
 
 				const ulong pos = ref.tellg();
 
-				if (!ref.seekg( 0, std::istream::end ))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!ref.seekg( 0, std::istream::end ))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 
 				Clear();
 
 				const ulong length = ulong(ref.tellg()) - pos;
 
-				if (!ref.seekg( pos ))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!ref.seekg( pos ))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 
 				Clear();
 
@@ -289,8 +289,8 @@ namespace Nes
 			{
 				NST_VERIFY( data && size );
 
-				if (!static_cast<std::ostream*>(stream)->write( reinterpret_cast<const char*>(data), size ))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!static_cast<std::ostream*>(stream)->write( reinterpret_cast<const char*>(data), size ))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 			}
 
 			void Out::Write8(const uint data)
@@ -362,8 +362,8 @@ namespace Nes
 			{
 				Clear();
 
-				if (!static_cast<std::ostream*>(stream)->seekp( distance, std::ios::cur ))
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!static_cast<std::ostream*>(stream)->seekp( distance, std::ios::cur ))
+				//	throw RESULT_ERR_CORRUPT_FILE;
 			}
 
 			bool Out::SeekEnd()

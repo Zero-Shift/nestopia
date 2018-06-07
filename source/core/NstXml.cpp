@@ -81,7 +81,7 @@ namespace Nes
 		{
 			byte* data = NULL;
 
-			try
+			//try
 			{
 				Stream::In stream( &stdStream );
 
@@ -91,13 +91,13 @@ namespace Nes
 				stream.Read( data, size );
 				std::memset( data + size, 0, 4 );
 			}
-			catch (...)
+			/*catch (...)
 			{
 				if (data)
 					delete [] data;
 
 				throw;
-			}
+			}*/
 
 			return data;
 		}
@@ -157,8 +157,8 @@ namespace Nes
 
 					if ((v & 0xE0) == 0xC0)
 					{
-						if ((w & 0xC0) != 0x80)
-							throw 1;
+						//if ((w & 0xC0) != 0x80)
+						//	throw 1;
 
 						v = (v << 6 & 0x7C0) | (w & 0x03F);
 					}
@@ -168,16 +168,16 @@ namespace Nes
 
 						if ((w & 0xC0) == 0x80)
 						{
-							if ((z & 0xC0) != 0x80)
-								throw 1;
+							//if ((z & 0xC0) != 0x80)
+							//	throw 1;
 
 							v = (v << 12 & 0xF000) | (w << 6 & 0x0FC0) | (z & 0x03F);
 						}
 					}
-					else
-					{
-						throw 1;
-					}
+					//else
+					//{
+					//	throw 1;
+					//}
 				}
 
 				return v;
@@ -304,7 +304,7 @@ namespace Nes
 
 			Vector<utfchar> buffer;
 
-			try
+			//try
 			{
 				Input input( stream );
 
@@ -370,11 +370,11 @@ namespace Nes
 					}
 				}
 			}
-			catch (...)
+			/*catch (...)
 			{
 				Destroy();
 				return NULL;
-			}
+			}*/
 
 			return Read( buffer.Begin() );
 		}
@@ -385,14 +385,14 @@ namespace Nes
 
 			if (type)
 			{
-				try
+				//try
 				{
 					root = new BaseNode( type, type + std::wcslen(type), BaseNode::OUT );
 				}
-				catch (...)
+				/*catch (...)
 				{
 					Destroy();
-				}
+				}*/
 			}
 
 			return root;
@@ -404,7 +404,7 @@ namespace Nes
 
 			if (file)
 			{
-				try
+				//try
 				{
 					for (utfstring stream = SkipVoid( file ); *stream; )
 					{
@@ -412,8 +412,8 @@ namespace Nes
 						{
 							case TAG_XML:
 
-								if (stream != file)
-									throw 1;
+								//if (stream != file)
+								//	throw 1;
 
 							case TAG_COMMENT:
 							case TAG_INSTRUCTION:
@@ -430,16 +430,16 @@ namespace Nes
 									break;
 								}
 
-							default:
+							//default:
 
-								throw 1;
+							//	throw 1;
 						}
 					}
 				}
-				catch (...)
+				/*catch (...)
 				{
 					Destroy();
-				}
+				}*/
 			}
 
 			return root;
@@ -576,15 +576,15 @@ namespace Nes
 			}
 			else if (node)
 			{
-				if (*stream++ != '/')
-					throw 1;
+				//if (*stream++ != '/')
+				//	throw 1;
 
 				for (wcstring type=node->type; *stream; ++stream, ++type)
 				{
 					if (ToWideChar(*stream) != *type)
 					{
-						if (*type)
-							throw 1;
+						//if (*type)
+						//	throw 1;
 
 						stream = SkipVoid( stream );
 						break;
@@ -624,15 +624,15 @@ namespace Nes
 
 						stream = SkipVoid( stream );
 
-						if (*stream++ != '=')
-							throw 1;
+						//if (*stream++ != '=')
+						//	throw 1;
 
 						stream = SkipVoid( stream );
 
 						const utfchar enclosing = *stream++;
 
-						if (enclosing != '\"' && enclosing != '\'')
-							throw 1;
+						//if (enclosing != '\"' && enclosing != '\'')
+						//	throw 1;
 
 						stream = SkipVoid( stream );
 
@@ -641,16 +641,16 @@ namespace Nes
 						while (*stream && *stream != enclosing)
 							++stream;
 
-						if (*stream != enclosing)
-							throw 1;
+						//if (*stream != enclosing)
+						//	throw 1;
 
 						node->AddAttribute( t, tn, v, RewindVoid(stream,v) );
 					}
 				}
 			}
 
-			if (*stream++ != '>')
-				throw 1;
+			//if (*stream++ != '>')
+			//	throw 1;
 
 			return SkipVoid( stream );
 		}
@@ -840,7 +840,7 @@ namespace Nes
 				}
 			}
 
-			throw 1;
+			//throw 1;
 		}
 
 		template<typename T,typename U>
@@ -852,8 +852,8 @@ namespace Nes
 		child     (NULL),
 		sibling   (NULL)
 		{
-			if (!type)
-				throw 1;
+			//if (!type)
+			//	throw 1;
 		}
 
 		template<typename T,typename U>
@@ -901,8 +901,8 @@ namespace Nes
 			{
 				if (!*value)
 					value = SetValue( new wchar_t [vn-v+1], v, vn, u );
-				else
-					throw 1;
+				//else
+				//	throw 1;
 			}
 		}
 
@@ -917,10 +917,10 @@ namespace Nes
 
 				(*a) = new Attribute( t, tn, v, vn, BaseNode::IN );
 			}
-			else if (vn-t)
-			{
-				throw 1;
-			}
+			//else if (vn-t)
+			//{
+			//	throw 1;
+			//}
 		}
 
 		wchar_t* Xml::BaseNode::SetType(wchar_t* NST_RESTRICT dst,utfstring src,utfstring const end,In)

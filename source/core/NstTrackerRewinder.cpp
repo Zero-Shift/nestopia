@@ -363,8 +363,8 @@ namespace Nes
 				Buffer tmp( size );
 				size = Zlib::Uncompress( buffer.Begin(), buffer.Size(), tmp.Begin(), tmp.Size() );
 
-				if (!size)
-					throw RESULT_ERR_CORRUPT_FILE;
+				//if (!size)
+				//	throw RESULT_ERR_CORRUPT_FILE;
 
 				NST_VERIFY( size == tmp.Size() );
 				Buffer::Swap( tmp, buffer );
@@ -393,15 +393,15 @@ namespace Nes
 		{
 			if (pos != BAD_POS)
 			{
-				try
+				//try
 				{
 					buffer.Append( data );
 				}
-				catch (...)
+				/*catch (...)
 				{
 					NST_DEBUG_MSG("buffer << data failed!");
 					pos = BAD_POS;
-				}
+				}*/
 			}
 
 			return data;
@@ -648,7 +648,7 @@ namespace Nes
 
 		void Tracker::Rewinder::Execute(Video::Output* videoOut,Sound::Output* soundOut,Input::Controllers* inputOut)
 		{
-			try
+			//try
 			{
 				if (uturn)
 					ChangeDirection();
@@ -708,11 +708,11 @@ namespace Nes
 					}
 				}
 			}
-			catch (...)
+			/*catch (...)
 			{
 				Reset();
 				throw;
-			}
+			}*/
 
 			(emulator.*emuExecute)( videoOut, soundOut, inputOut );
 		}
@@ -754,8 +754,8 @@ namespace Nes
 				{
 					Execute( NULL, NULL, NULL );
 
-					if (!rewinding)
-						throw RESULT_ERR_CORRUPT_FILE;
+					//if (!rewinding)
+					//	throw RESULT_ERR_CORRUPT_FILE;
 				}
 
 				Api::Rewinder::stateCallback( Api::Rewinder::REWINDING );

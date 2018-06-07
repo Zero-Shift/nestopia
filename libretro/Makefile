@@ -183,7 +183,7 @@ else ifeq ($(platform), switch)
                 -fPIE -I$(LIBNX)/include/ -ffunction-sections -fdata-sections -ftls-model=local-exec -Wl,--allow-multiple-definition -specs=$(LIBNX)/switch.specs
     CFLAGS += $(INCDIRS)
     CFLAGS    +=    $(INCLUDE)  -D__SWITCH__
-    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fno-rtti -fexceptions -std=gnu++11
+    CXXFLAGS := $(ASFLAGS) $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++11
     CFLAGS += -std=gnu11
     STATIC_LINKING = 1
 

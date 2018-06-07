@@ -39,11 +39,11 @@ namespace Nes
 
 		Result Rewinder::Enable(bool enable) throw()
 		{
-			try
+			//try
 			{
 				return emulator.tracker.EnableRewinder( enable ? &emulator : NULL );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				return result;
 			}
@@ -54,7 +54,7 @@ namespace Nes
 			catch (...)
 			{
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 		}
 
 		bool Rewinder::IsEnabled() const throw()

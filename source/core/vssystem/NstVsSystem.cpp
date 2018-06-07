@@ -287,7 +287,7 @@ namespace Nes
 			const dword prgCrc
 		)
 		{
-			switch (prgCrc)
+			/*switch (prgCrc)
 			{
 				// VS. Dual-System Games are unsupported
 
@@ -312,11 +312,11 @@ namespace Nes
 				case 0x7D6B764F: // Ice Climber P2
 
 					throw RESULT_ERR_UNSUPPORTED_VSSYSTEM;
-			}
+			}*/
 
 			Context context( cpu, ppu );
 
-			try
+			//try
 			{
 				// Credit to the MAME devs for much of the DIP switch info.
 
@@ -1271,11 +1271,11 @@ namespace Nes
 					default:       return new VsSystem     ( context );
 				}
 			}
-			catch (...)
+			/*catch (...)
 			{
 				delete [] context.dips;
 				throw;
-			}
+			}*/
 		}
 
 		void Cartridge::VsSystem::Destroy(Cartridge::VsSystem* vsSystem)

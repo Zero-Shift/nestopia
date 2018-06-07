@@ -193,15 +193,15 @@ namespace Nes
 						{
 							Loader loader( game, player->slots[i], i, filename );
 
-							try
+							//try
 							{
 								Api::User::fileIoCallback( loader );
 							}
-							catch (...)
+							/*catch (...)
 							{
 								delete player;
 								throw;
-							}
+							}*/
 						}
 					}
 

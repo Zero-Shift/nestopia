@@ -1185,7 +1185,7 @@ namespace Nes
 		{
 			Unload();
 
-			try
+			//try
 			{
 				Xml baseXml, overrideXml;
 				Item::Builder builder;
@@ -1194,7 +1194,7 @@ namespace Nes
 				{
 					Xml& xml = (multi ? overrideXml : baseXml);
 
-					try
+					/*try
 					{
 						if (!xml.Read( multi ? *overrideStream : baseStream ))
 							return RESULT_ERR_CORRUPT_FILE;
@@ -1218,8 +1218,8 @@ namespace Nes
 							(version[2] < L'0' || version[2] > L'9') ||
 							(version[3] != L'\0')
 						)
-							throw RESULT_ERR_INVALID_FILE;
-					}
+							//throw RESULT_ERR_INVALID_FILE;
+					}*/
 
 					const bool strict = !xml.GetRoot().GetAttribute( L"conformance" ).IsValue( L"loose" );
 
@@ -1594,7 +1594,7 @@ namespace Nes
 
 				builder.Construct( strings, items.begin, items.end );
 			}
-			catch (Result result)
+			/*catch (Result result)
 			{
 				Unload( true );
 				return result;
@@ -1608,7 +1608,7 @@ namespace Nes
 			{
 				Unload( true );
 				return RESULT_ERR_GENERIC;
-			}
+			}*/
 
 			Log() << "Database: "
                   << (items.end - items.begin)
@@ -1666,14 +1666,14 @@ namespace Nes
 		{
 			std::pair<ItemMap::iterator,bool> entry;
 
-			try
+			//try
 			{
 				entry = itemMap.insert( item );
 			}
-			catch (...)
+			//catch (...)
 			{
 				delete item;
-				throw;
+				//throw;
 			}
 
 			if (!entry.second && !(*entry.first)->Add(item))

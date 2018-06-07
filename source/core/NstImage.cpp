@@ -67,7 +67,7 @@ namespace Nes
 					break;
 			}
 
-			throw RESULT_ERR_INVALID_FILE;
+			//throw RESULT_ERR_INVALID_FILE;
 		}
 
 		void Image::Unload(Image* image)

@@ -261,7 +261,7 @@ namespace Nes
 			if (state & Api::Machine::SOUND)
 				hard = true;
 
-			try
+			//try
 			{
 				frame = 0;
 				cpu.Reset( hard );
@@ -313,10 +313,10 @@ namespace Nes
 					Api::Machine::eventCallback( Api::Machine::EVENT_POWER_ON );
 				}
 			}
-			catch (...)
+			//catch (...)
 			{
 				PowerOff();
-				throw;
+				//throw;
 			}
 		}
 
@@ -386,10 +386,10 @@ namespace Nes
 		{
 			NST_ASSERT( (state & (Api::Machine::GAME|Api::Machine::ON)) > Api::Machine::ON );
 
-			try
+			//try
 			{
-				if (loader.Begin() != (AsciiId<'N','S','T'>::V | 0x1AUL << 24))
-					throw RESULT_ERR_INVALID_FILE;
+				//if (loader.Begin() != (AsciiId<'N','S','T'>::V | 0x1AUL << 24))
+				//	throw RESULT_ERR_INVALID_FILE;
 
 				while (const dword chunk = loader.Begin())
 				{
@@ -474,12 +474,12 @@ namespace Nes
 
 				loader.End();
 			}
-			catch (...)
+			//catch (...)
 			{
 				if (resetOnError)
 					Reset( true );
 
-				throw;
+				//throw;
 			}
 
 			return true;
